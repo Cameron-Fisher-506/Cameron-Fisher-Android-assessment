@@ -1,11 +1,11 @@
-package com.glucode.about_you.about
+package com.glucode.about_you.engineers
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.glucode.about_you.about.views.QuestionCardView
+import com.glucode.about_you.views.QuestionCardView
 import com.glucode.about_you.databinding.FragmentAboutBinding
 import com.glucode.about_you.mockdata.MockData
 

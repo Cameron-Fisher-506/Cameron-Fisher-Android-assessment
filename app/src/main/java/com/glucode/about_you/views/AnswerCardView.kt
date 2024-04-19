@@ -1,4 +1,4 @@
-package com.glucode.about_you.about.views
+package com.glucode.about_you.views
 
 import android.content.Context
 import android.util.AttributeSet
