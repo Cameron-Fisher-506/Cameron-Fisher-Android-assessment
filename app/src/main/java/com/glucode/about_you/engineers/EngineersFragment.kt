@@ -3,6 +3,7 @@ package com.glucode.about_you.engineers
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.glucode.about_you.R
@@ -12,6 +13,7 @@ import com.glucode.about_you.mockdata.MockData
 
 class EngineersFragment : Fragment() {
     private lateinit var binding: FragmentEngineersBinding
+    private val engineersViewModel by viewModels<EngineersViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,18 +33,15 @@ class EngineersFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_years) {
-            val sortedEngineerList = MockData.engineers.sortedBy { it.quickStats.years }
-            setUpEngineersList(sortedEngineerList)
+            setUpEngineersList(engineersViewModel.getSortedEngineersByYear())
             return true
         }
         if (item.itemId == R.id.action_bugs) {
-            val sortedEngineerList = MockData.engineers.sortedBy { it.quickStats.bugs }
-            setUpEngineersList(sortedEngineerList)
+            setUpEngineersList(engineersViewModel.getSortedEngineersByBugs())
             return true
         }
         if (item.itemId == R.id.action_coffees) {
-            val sortedEngineerList = MockData.engineers.sortedBy { it.quickStats.coffees }
-            setUpEngineersList(sortedEngineerList)
+            setUpEngineersList(engineersViewModel.getSortedEngineersByCoffees())
             return true
         }
         return super.onOptionsItemSelected(item)
