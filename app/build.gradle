@@ -57,9 +57,16 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
     implementation project(path: ':composelibrary')
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //JUnit 4
+    testImplementation "junit:junit:4.13.2"
+
+    //JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.0")
+
+    //Mockito
+    testImplementation "org.mockito:mockito-core:3.11.2"
+    testImplementation "org.mockito:mockito-inline:3.11.2"
 
     //Lifecycle components
     implementation "android.arch.lifecycle:extensions:${lifecycleExtensionsVersion}"
