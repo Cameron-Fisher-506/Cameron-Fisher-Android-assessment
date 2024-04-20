@@ -62,7 +62,7 @@ fun ProfileImage(@DrawableRes drawableResourceId: Int, onClick: () -> Unit) {
         painterResource(drawableResourceId),
         stringResource(R.string.dummy_text),
         Modifier
-            .size(110.dp)
+            .size(120.dp)
             .clickable { onClick.invoke() }
     )
 }
