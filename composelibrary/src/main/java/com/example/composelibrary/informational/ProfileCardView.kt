@@ -95,7 +95,7 @@ fun StatesView(statsMap: Map<String, Int>) {
             Modifier
                 .fillMaxWidth(1f)
                 .padding(start = 10.dp, top = 5.dp, end = 5.dp),
-            Arrangement.SpaceAround,
+            Arrangement.SpaceEvenly,
             Alignment.CenterVertically
         ) {
             for((key, _) in statsMap) {
@@ -106,7 +106,7 @@ fun StatesView(statsMap: Map<String, Int>) {
             Modifier
                 .fillMaxWidth(1f)
                 .padding(bottom = 5.dp),
-            Arrangement.SpaceAround,
+            Arrangement.SpaceEvenly,
             Alignment.CenterVertically
         ) {
             for((_, value) in statsMap) {
