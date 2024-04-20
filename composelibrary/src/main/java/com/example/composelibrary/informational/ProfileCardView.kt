@@ -30,9 +30,7 @@ fun ProfileCardView(
     @DrawableRes drawableResourceId: Int,
     title: String,
     subTitle: String,
-    numberOfYears: String,
-    numberOfCoffees: String,
-    numberOfBugs: String,
+    statesMap: Map<String, String>,
     onClick: () -> Unit
 ) {
     Surface(Modifier.wrapContentSize()) {
@@ -52,7 +50,7 @@ fun ProfileCardView(
                     .padding(15.dp),
             ) {
                 ProfileImage(drawableResourceId, onClick)
-                ProfileDescription(title, subTitle, numberOfYears, numberOfCoffees, numberOfBugs)
+                ProfileDescription(title, subTitle, statesMap)
             }
         }
     }
@@ -73,32 +71,46 @@ fun ProfileImage(@DrawableRes drawableResourceId: Int, onClick: () -> Unit) {
 fun ProfileDescription(
     title: String,
     subTitle: String,
-    numberOfYears: String,
-    numberOfCoffees: String,
-    numberOfBugs: String,
+    statesMap: Map<String, String>
 ) {
     Column(Modifier.padding(15.dp, 0.dp)) {
         Text(title, style = MaterialTheme.typography.titleLarge)
         Text(subTitle, style = MaterialTheme.typography.titleMedium)
-        Card(
+        StatesView(statesMap)
+    }
+}
+
+@Composable
+fun StatesView(statesMap: Map<String, String>) {
+    Card(
+        Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+            contentColor = Color.Black
+        )
+    ) {
+        Row(
             Modifier
-                .fillMaxWidth()
-                .padding(top = 15.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White,
-                contentColor = Color.Black
-            )
+                .fillMaxWidth(1f)
+                .padding(start = 10.dp, top = 5.dp, end = 10.dp),
+            Arrangement.SpaceAround,
+            Alignment.CenterVertically
         ) {
-            Row(
-                Modifier
-                    .fillMaxWidth(1f)
-                    .padding(10.dp),
-                Arrangement.SpaceEvenly,
-                Alignment.CenterVertically
-            ) {
-                Text(text = "Years", style = MaterialTheme.typography.titleSmall)
-                Text(text = "Coffees", style = MaterialTheme.typography.titleSmall)
-                Text(text = "Bugs", style = MaterialTheme.typography.titleSmall)
+            for((key, _) in statesMap) {
+                Text(key, style = MaterialTheme.typography.titleSmall)
+            }
+        }
+        Row(
+            Modifier
+                .fillMaxWidth(1f)
+                .padding(bottom = 5.dp),
+            Arrangement.SpaceAround,
+            Alignment.CenterVertically
+        ) {
+            for((_, value) in statesMap) {
+                Text(value, style = MaterialTheme.typography.titleSmall)
             }
         }
     }
@@ -107,7 +119,12 @@ fun ProfileDescription(
 @Preview
 @Composable
 fun PreviewProfileCardView() {
-    ProfileCardView(R.drawable.ic_launcher_background, "Title", "SubTitle", "4", "3", "6") {
+    val statesMap: Map<String, String> = mapOf(
+        "Years" to "4",
+        "Coffees" to "3",
+        "Bugs" to "9"
+    )
+    ProfileCardView(R.drawable.ic_launcher_background, "Title", "SubTitle", statesMap) {
 
     }
 }
