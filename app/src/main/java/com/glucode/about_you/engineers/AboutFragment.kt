@@ -1,18 +1,18 @@
 package com.glucode.about_you.engineers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.composelibrary.informational.ProfileCardView
 import com.glucode.about_you.R
-import com.glucode.about_you.views.QuestionCardView
 import com.glucode.about_you.databinding.FragmentAboutBinding
 import com.glucode.about_you.engineers.models.QuickStats
 import com.glucode.about_you.mockdata.MockData
-import com.google.android.material.snackbar.Snackbar
+import com.glucode.about_you.views.QuestionCardView
+
 
 class AboutFragment: Fragment() {
     private lateinit var binding: FragmentAboutBinding
@@ -38,6 +38,9 @@ class AboutFragment: Fragment() {
         )
         binding.composeView.setContent {
             ProfileCardView(R.drawable.ic_person, name, role, statsMap) {
+                Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+                    startActivityForResult(this, 0)
+                }
             }
         }
     }

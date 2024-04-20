@@ -62,7 +62,7 @@ fun ProfileImage(@DrawableRes drawableResourceId: Int, onClick: () -> Unit) {
         painterResource(drawableResourceId),
         stringResource(R.string.dummy_text),
         Modifier
-            .size(120.dp)
+            .size(110.dp)
             .clickable { onClick.invoke() }
     )
 }
@@ -73,7 +73,7 @@ fun ProfileDescription(
     subTitle: String,
     statesMap: Map<String, Int>
 ) {
-    Column(Modifier.padding(15.dp, 0.dp)) {
+    Column(Modifier.padding(start = 15.dp)) {
         Text(title, style = MaterialTheme.typography.titleLarge)
         Text(subTitle, style = MaterialTheme.typography.titleMedium)
         StatesView(statesMap)
@@ -94,7 +94,7 @@ fun StatesView(statsMap: Map<String, Int>) {
         Row(
             Modifier
                 .fillMaxWidth(1f)
-                .padding(start = 10.dp, top = 5.dp, end = 10.dp),
+                .padding(start = 10.dp, top = 5.dp, end = 5.dp),
             Arrangement.SpaceAround,
             Alignment.CenterVertically
         ) {
