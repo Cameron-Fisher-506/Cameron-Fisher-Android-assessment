@@ -30,7 +30,7 @@ fun ProfileCardView(
     @DrawableRes drawableResourceId: Int,
     title: String,
     subTitle: String,
-    statesMap: Map<String, String>,
+    statsMap: Map<String, Int>,
     onClick: () -> Unit
 ) {
     Surface(Modifier.wrapContentSize()) {
@@ -50,7 +50,7 @@ fun ProfileCardView(
                     .padding(15.dp),
             ) {
                 ProfileImage(drawableResourceId, onClick)
-                ProfileDescription(title, subTitle, statesMap)
+                ProfileDescription(title, subTitle, statsMap)
             }
         }
     }
@@ -71,7 +71,7 @@ fun ProfileImage(@DrawableRes drawableResourceId: Int, onClick: () -> Unit) {
 fun ProfileDescription(
     title: String,
     subTitle: String,
-    statesMap: Map<String, String>
+    statesMap: Map<String, Int>
 ) {
     Column(Modifier.padding(15.dp, 0.dp)) {
         Text(title, style = MaterialTheme.typography.titleLarge)
@@ -81,7 +81,7 @@ fun ProfileDescription(
 }
 
 @Composable
-fun StatesView(statesMap: Map<String, String>) {
+fun StatesView(statsMap: Map<String, Int>) {
     Card(
         Modifier
             .fillMaxWidth()
@@ -98,7 +98,7 @@ fun StatesView(statesMap: Map<String, String>) {
             Arrangement.SpaceAround,
             Alignment.CenterVertically
         ) {
-            for((key, _) in statesMap) {
+            for((key, _) in statsMap) {
                 Text(key, style = MaterialTheme.typography.titleSmall)
             }
         }
@@ -109,8 +109,8 @@ fun StatesView(statesMap: Map<String, String>) {
             Arrangement.SpaceAround,
             Alignment.CenterVertically
         ) {
-            for((_, value) in statesMap) {
-                Text(value, style = MaterialTheme.typography.titleSmall)
+            for((_, value) in statsMap) {
+                Text(value.toString(), style = MaterialTheme.typography.titleSmall)
             }
         }
     }
@@ -119,12 +119,12 @@ fun StatesView(statesMap: Map<String, String>) {
 @Preview
 @Composable
 fun PreviewProfileCardView() {
-    val statesMap: Map<String, String> = mapOf(
-        "Years" to "4",
-        "Coffees" to "3",
-        "Bugs" to "9"
+    val statsMap: Map<String, Int> = mapOf(
+        "Years" to 4,
+        "Coffees" to 3,
+        "Bugs" to 9
     )
-    ProfileCardView(R.drawable.ic_launcher_background, "Title", "SubTitle", statesMap) {
+    ProfileCardView(R.drawable.ic_launcher_background, "Title", "SubTitle", statsMap) {
 
     }
 }
