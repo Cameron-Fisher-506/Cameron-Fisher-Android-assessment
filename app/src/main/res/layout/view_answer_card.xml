@@ -9,5 +9,4 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
         style="@style/Material.Body2.Light"/>
-
 </merge>
