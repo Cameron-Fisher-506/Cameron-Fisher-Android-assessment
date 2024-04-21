@@ -3,6 +3,9 @@ package com.glucode.about_you.engineers
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.glucode.about_you.R
 import com.glucode.about_you.databinding.ItemEngineerBinding
 import com.glucode.about_you.engineers.models.Engineer
 
@@ -29,8 +32,12 @@ class EngineersRecyclerViewAdapter(
             binding.root.setOnClickListener {
                 onClick(engineer)
             }
-            //TODO - set profile picture
-//            statusIcon.setDrawable(item.icon)
+
+            Glide.with(binding.root)
+                .load(engineer.defaultImageName)
+                .error(R.drawable.ic_person)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .into(binding.profileImage)
         }
     }
 }
