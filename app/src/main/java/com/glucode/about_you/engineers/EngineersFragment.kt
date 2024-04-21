@@ -11,7 +11,7 @@ import com.glucode.about_you.databinding.FragmentEngineersBinding
 import com.glucode.about_you.engineers.models.Engineer
 import com.glucode.about_you.mockdata.MockData
 
-class EngineersFragment : Fragment() {
+class EngineersFragment : EngineersBaseFragment() {
     private lateinit var binding: FragmentEngineersBinding
     private val engineersViewModel by viewModels<EngineersViewModel>()
 

@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.example.composelibrary.informational.ProfileCardView
 import com.glucode.about_you.databinding.FragmentAboutBinding
 import com.glucode.about_you.engineers.models.QuickStats
 import com.glucode.about_you.views.QuestionCardView
 
-class EngineersAboutFragment: Fragment() {
+class EngineersAboutFragment: EngineersBaseFragment() {
     private lateinit var binding: FragmentAboutBinding
     private val engineersAboutViewModel by viewModels<EngineersAboutViewModel>()
 
@@ -31,9 +31,9 @@ class EngineersAboutFragment: Fragment() {
 
     private fun setUpProfileCardView(name: String, role: String, quickStats: QuickStats) {
         binding.composeView.setContent {
-            ProfileCardView(engineersAboutViewModel.drawableResource.value, name, role, engineersAboutViewModel.getStatsMap(quickStats)) {
+            ProfileCardView(engineersSharedViewModel.drawableResource.value, name, role, engineersAboutViewModel.getStatsMap(quickStats)) {
                 Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
-                    startActivityForResult(this, 0)
+                    startActivityForResult(this, 0) //TODO: registerForActivityResult was not working for some odd reason
                 }
             }
         }
