@@ -1,7 +1,6 @@
 package com.example.composelibrary.informational
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,15 +18,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.composelibrary.R
 
 @Composable
 fun ProfileCardView(
-    @DrawableRes drawableResourceId: Int,
+    imageUri: Uri? = null,
     title: String,
     subTitle: String,
     statsMap: Map<String, Int>,
@@ -49,22 +49,27 @@ fun ProfileCardView(
                     .fillMaxWidth(1f)
                     .padding(15.dp),
             ) {
-                ProfileImage(drawableResourceId, onClick)
+                ProfileImage(imageUri, onClick)
                 ProfileDescription(title, subTitle, statsMap)
             }
         }
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ProfileImage(@DrawableRes drawableResourceId: Int, onClick: () -> Unit) {
-    Image(
-        painterResource(drawableResourceId),
-        stringResource(R.string.dummy_text),
-        Modifier
+fun ProfileImage(imageUri: Uri? = null, onClick: () -> Unit) {
+    GlideImage(
+        model = imageUri,
+        contentDescription = stringResource(R.string.dummy_text),
+        modifier = Modifier
             .size(110.dp)
             .clickable { onClick.invoke() }
-    )
+    ) {
+        it.error(R.drawable.ic_person)
+            .placeholder(R.drawable.ic_person)
+            .load(imageUri)
+    }
 }
 
 @Composable
@@ -124,7 +129,7 @@ fun PreviewProfileCardView() {
         "Coffees" to 3,
         "Bugs" to 9
     )
-    ProfileCardView(R.drawable.ic_launcher_background, "Title", "SubTitle", statsMap) {
+    ProfileCardView(null, "Title", "SubTitle", statsMap) {
 
     }
 }
