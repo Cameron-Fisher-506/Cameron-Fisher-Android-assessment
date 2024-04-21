@@ -44,6 +44,7 @@ class EngineersAboutFragment: EngineersBaseFragment() {
         val engineer = engineersAboutViewModel.getSelectedEngineerByName(engineerName)
 
         if (engineer != null) {
+            engineersSharedViewModel.selectedEngineer = engineer
             setUpProfileCardView(engineer.name, engineer.role, engineer.quickStats)
             engineer.questions.forEach { question ->
                 val questionView = QuestionCardView(requireContext()).apply {

@@ -28,5 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) { //TODO: registerForActivityResult was not working for some odd reason
         super.onActivityResult(requestCode, resultCode, data)
         engineersSharedViewModel.drawableResource.value = data?.data ?: Uri.EMPTY
+        engineersSharedViewModel.selectedEngineer.defaultImageName = engineersSharedViewModel.drawableResource.value.toString()
+        engineersSharedViewModel.saveEngineerData(engineersSharedViewModel.selectedEngineer)
     }
 }
