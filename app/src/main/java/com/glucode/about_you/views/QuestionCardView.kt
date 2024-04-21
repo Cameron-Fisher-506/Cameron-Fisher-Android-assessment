@@ -1,4 +1,4 @@
-package com.glucode.about_you.about.views
+package com.glucode.about_you.views
 
 import android.content.Context
 import android.util.AttributeSet
@@ -58,10 +58,7 @@ class QuestionCardView @JvmOverloads constructor(
             binding.answers.children.filter { it.isSelected }.forEach {
                 it.isSelected = false
             }
+            view.isSelected = true
         }
-    }
-
-    private fun setSelection() {
-
     }
 }
