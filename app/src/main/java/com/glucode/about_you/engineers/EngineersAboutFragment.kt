@@ -1,6 +1,7 @@
 package com.glucode.about_you.engineers
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class EngineersAboutFragment: EngineersBaseFragment() {
         val engineer = engineersAboutViewModel.getSelectedEngineerByName(engineerName)
 
         if (engineer != null) {
+            EngineersFlowManager.selectedEngineer = engineer
             setUpProfileCardView(engineer.name, engineer.role, engineer.quickStats)
             engineer.questions.forEach { question ->
                 val questionView = QuestionCardView(requireContext()).apply {

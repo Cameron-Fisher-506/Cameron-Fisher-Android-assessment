@@ -27,7 +27,7 @@ import com.example.composelibrary.R
 
 @Composable
 fun ProfileCardView(
-    imageUri: Uri? = null,
+    imageUri: Uri = Uri.EMPTY,
     title: String,
     subTitle: String,
     statsMap: Map<String, Int>,
@@ -58,7 +58,7 @@ fun ProfileCardView(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ProfileImage(imageUri: Uri? = null, onClick: () -> Unit) {
+fun ProfileImage(imageUri: Uri = Uri.EMPTY, onClick: () -> Unit) {
     GlideImage(
         model = imageUri,
         contentDescription = stringResource(R.string.dummy_text),
@@ -129,7 +129,7 @@ fun PreviewProfileCardView() {
         "Coffees" to 3,
         "Bugs" to 9
     )
-    ProfileCardView(null, "Title", "SubTitle", statsMap) {
+    ProfileCardView(Uri.EMPTY, "Title", "SubTitle", statsMap) {
 
     }
 }
