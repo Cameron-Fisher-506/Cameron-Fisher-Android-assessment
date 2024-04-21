@@ -9,7 +9,8 @@ object DataAccessStrategyUtils {
         crossinline saveCall: suspend (A) -> Unit
     ): Resource<T> {
         val result = dbQuery.invoke()
-        return if (result.data != null) {
+        val data = result.data
+        return if (data != null && (data as List<T>).size > 0) {
             result
         } else {
             val response = wsCall.invoke()

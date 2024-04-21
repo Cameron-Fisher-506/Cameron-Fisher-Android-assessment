@@ -9,7 +9,7 @@ import com.glucode.about_you.model.room.upsert
 import com.glucode.about_you.utils.DataAccessStrategyUtils
 import com.glucode.about_you.utils.Resource
 
-class EngineersRepository constructor(application: Application) {
+class EngineersRepository(application: Application) {
     private val engineerDao: IEngineersDao = EngineersDatabase.getDatabase(application).engineerDao()
 
     suspend fun fetchEngineers(): Resource<List<Engineer>> {

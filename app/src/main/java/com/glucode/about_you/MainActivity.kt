@@ -7,8 +7,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.glucode.about_you.engineers.EngineersFlowManager
 import com.glucode.about_you.engineers.EngineersSharedViewModel
-
+import com.glucode.about_you.model.room.EngineersDatabase
+import com.glucode.about_you.model.room.IEngineersDao
+import com.glucode.about_you.model.room.upsert
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : AppCompatActivity() {
     private val engineersSharedViewModel by viewModels<EngineersSharedViewModel>()
@@ -16,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val navController = findNavController(R.id.fragment_host)
         setupActionBarWithNavController(navController)
     }
@@ -28,7 +36,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) { //TODO: registerForActivityResult was not working for some odd reason
         super.onActivityResult(requestCode, resultCode, data)
         engineersSharedViewModel.drawableResource.value = data?.data ?: Uri.EMPTY
-        engineersSharedViewModel.selectedEngineer.defaultImageName = engineersSharedViewModel.drawableResource.value.toString()
-        engineersSharedViewModel.saveEngineerData(engineersSharedViewModel.selectedEngineer)
+        EngineersFlowManager.selectedEngineer.defaultImageName = engineersSharedViewModel.drawableResource.value.toString()
+        val engineerDao: IEngineersDao = EngineersDatabase.getDatabase(application).engineerDao()
+        runBlocking {
+            engineerDao.upsert(EngineersFlowManager.selectedEngineer, engineerDao)
+        }
     }
 }

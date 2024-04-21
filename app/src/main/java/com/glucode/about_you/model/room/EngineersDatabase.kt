@@ -2,11 +2,14 @@ package com.glucode.about_you.model.room
 
 import android.content.Context
 import androidx.lifecycle.liveData
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.glucode.about_you.engineers.models.Engineer
 import com.glucode.about_you.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
+@Database(entities = [Engineer::class], version = 1, exportSchema = false)
 abstract class EngineersDatabase : RoomDatabase() {
 
     abstract fun engineerDao(): IEngineersDao
@@ -22,7 +25,7 @@ abstract class EngineersDatabase : RoomDatabase() {
                 return tempInstance
             } else {
                 synchronized(this) {
-                    val instance = Room.databaseBuilder(context.applicationContext, EngineersDatabase::class.java, "botcoin").build()
+                    val instance = Room.databaseBuilder(context.applicationContext, EngineersDatabase::class.java, "engineers").build()
                     INSTANCE = instance
                     return instance
                 }
