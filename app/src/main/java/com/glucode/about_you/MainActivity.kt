@@ -19,12 +19,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.coroutineContext
 
-class MainActivity : AppCompatActivity() {
-    private val engineersSharedViewModel by viewModels<EngineersSharedViewModel>()
+class MainActivity : BaseActivity() {
+    private val engineersSharedViewModel by viewModels<EngineersSharedViewModel>(factoryProducer = { getViewModelFactory })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        lateinit var viewModelFactory: ViewModelFactory<EngineersSharedViewModel>
         val navController = findNavController(R.id.fragment_host)
         setupActionBarWithNavController(navController)
     }
